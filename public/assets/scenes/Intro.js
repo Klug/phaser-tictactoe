@@ -5,10 +5,12 @@ export default class Intro extends Phaser.Scene {
 		});
 	}
 	preload() {
-		this.load.script(
-			'webfont',
-			'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
-		);
+		this.load.audio('intro_music', ['/assets/audio/01-Opening.ogg']);
+		this.load.image('background', '/assets/sprites/titlescreen/background.png');
+		this.load.image('bgbox', '/assets/sprites/titlescreen/bgbox.png');
+		this.load.image('title', '/assets/sprites/titlescreen/title.png');
+		this.load.image('tictactoe', '/assets/sprites/titlescreen/tictactoetitle.png');
+		this.load.image('startbutton', '/assets/sprites/titlescreen/startbutton.png');
 
 		var progress = this.add.graphics();
 		const self = this;
@@ -23,46 +25,9 @@ export default class Intro extends Phaser.Scene {
 		});
 	}
 	create() {
-		this.make.text({
-			x: 250,
-			y: 300,
-			text: 'Press Space Bar',
-			style: {
-				fontSize: '20px',
-				fontFamily: 'Arial',
-				color: '#ffffff',
-				align: 'center',
-				backgroundColor: '#000000',
-				shadow: {
-					color: '#000000',
-					fill: true,
-					offsetX: 2,
-					offsetY: 2,
-					blur: 8
-				}
-			}
-		});
-		var add = this.add;
-		var input = this.input;
-		WebFont.load({
-			google: {
-				families: ['Fredericka the Great']
-			},
-			active: function() {
-				add
-					.text(75, 100, `Phaser 3 Starter Kit`, {
-						fontFamily: 'Fredericka the Great',
-						fontSize: 50,
-						color: '#ffffff'
-					})
-					.setShadow(2, 2, '#333333', 2, false, true);
-			}
-		});
-		this.keys = this.input.keyboard.addKeys('SPACE');
+
 	}
 	update(delta) {
-		if (this.keys.SPACE.isDown) {
-			this.scene.start('Level1');
-		}
+		
 	}
 }
