@@ -11,6 +11,7 @@ export default class Intro extends Phaser.Scene {
 		this.load.image('title', '/assets/sprites/titlescreen/title.png');
 		this.load.image('tictactoe', '/assets/sprites/titlescreen/tictactoetitle.png');
 		this.load.image('startbutton', '/assets/sprites/titlescreen/startbutton.png');
+		this.load.image('championships','/assets/sprites/titlescreen/championshipstitle.png');
 
 		var progress = this.add.graphics();
 		const self = this;
@@ -24,10 +25,102 @@ export default class Intro extends Phaser.Scene {
 			progress.destroy();
 		});
 	}
-	create() {
 
+	create() {
+		//**AUDIO
+			//*titlescreen
+		this.intro_music = this.sound.add('intro_music', {
+			mute: false,
+			volume: 1,
+			loop: true
+		});
+		// this.intro_music.play();
+
+		//**IMAGES
+			//*titlescreen
+		this.background = this.add.image(0, 0, 'background').setOrigin(0, 0);
+		this.bgbox = this.add.image(0, 0, 'bgbox').setOrigin(0, 0).setAlpha(0);
+		this.title = this.add.image(this.game.config.width / 2, 120, 'title').setAlpha(0);
+		this.championships = this.add.image(this.game.config.width / 2, 200, 'championships').setAlpha(0);
+		this.tictactoe = this.add.image(this.game.config.width / 2, 220, 'tictactoe').setAlpha(0);
+		this.startbutton = this.add.image(this.game.config.width / 2, 270, 'startbutton').setAlpha(0);
+
+		//**ANIMATION
+			//*titlescreen
+		this.bgboxTween = this.tweens.timeline({
+			targets: this.bgbox,
+			ease: 'Linear',
+			loop: -1,
+			tweens: [{
+					alpha: 0.5,
+					ease: 'Linear',
+					duration: 2000,
+					delay: 2000,
+					repeat: 0,
+					yoyo: true
+				}]
+		});
+		this.titleTween = this.tweens.timeline({
+			targets: this.title,
+			ease: 'Linear',
+			loop: 0,
+			tweens: [{
+				y: 100,
+				alpha: 1,
+				ease: 'Linear',
+				duration: 2000,
+				delay: 0,
+				repeat: 0
+			}, {
+				y: 110,
+				alpha: 1,
+				ease: 'Linear',
+				duration: 1000,
+				delay: 0,
+				repeat: -1,
+				yoyo: true
+			}]
+		});
+		this.championshipTween = this.tweens.timeline({
+			targets: this.championships,
+			ease: 'Linear',
+			loop: 0,
+			tweens: [{
+				y: 170,
+				alpha: 1,
+				ease: 'Linear',
+				duration: 1000,
+				delay: 1300,
+				repeat: 0
+			}]
+		});
+		this.tictactoeTween = this.tweens.timeline({
+			targets: this.tictactoe,
+			ease: 'Linear',
+			loop: 0,
+			tweens: [{
+				y: 200,
+				alpha: 1,
+				ease: 'Linear',
+				duration: 1000,
+				delay: 2000,
+				repeat: 0
+			}]
+		});
+		this.startbuttonTween = this.tweens.timeline({
+			targets: this.startbutton,
+			ease: 'Linear',
+			loop: 0,
+			tweens: [{
+				y: 240,
+				alpha: 1,
+				ease: 'Bounce',
+				duration: 1000,
+				delay: 6000,
+				repeat: 0
+			}]
+		});
 	}
 	update(delta) {
-		
 	}
 }
