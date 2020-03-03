@@ -60,7 +60,7 @@ export default class Level1 extends Phaser.Scene {
 		this.box_blank8 = this.add.image(74, 186, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 8);
 		this.box_blank9 = this.add.image(116, 186, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 9);
 			//display winning and play again
-		this.playagainBtn = this.add.image(this.game.config.width/2, 275, 'playagain').setDepth(5);
+		this.playagainBtn = this.add.image(this.game.config.width/2, 400, 'playagain').setDepth(5);
 		this.wins = this.add.image(-200, 150, 'wins').setDepth(5);
 		this.xIcon = this.add.image(this.game.config.width / 2, 140, 'xIcon').setAlpha(0).setScale(0.5, 0.5).setDepth(6);
 		this.oIcon = this.add.image(this.game.config.width / 2, 140, 'oIcon').setAlpha(0).setScale(0.5, 0.5).setDepth(6);
@@ -141,19 +141,72 @@ export default class Level1 extends Phaser.Scene {
 		});
 	}
 
+	winningAnimation(winner) {
+		this.tweens.add({
+			targets: this.wins,
+			x: this.game.config.width / 2,
+			y: 150,
+			ease: 'Linear',
+			duration: 500,
+			repeat: 0,
+			yoyo: false
+		});
+		if(winner == 'x') {
+			this.tweens.add({
+				targets: this.xIcon,
+				x: this.game.config.width / 2,
+				y: 140,
+				alpha: 1,
+				ease: 'Linear',
+				delay: 500,
+				duration: 300,
+				repeat: 0,
+				yoyo: false
+			});
+			this.winning_sound.play();
+		} else if (winner == 'o') {
+			this.tweens.add({
+				targets: this.oIcon,
+				x: this.game.config.width / 2,
+				y: 140,
+				alpha: 1,
+				ease: 'Linear',
+				delay: 500,
+				duration: 300,
+				repeat: 0,
+				yoyo: false
+			});
+			this.winning_sound.play();
+		} else {
+			alert('DRAW');
+		}
+		//play again btn
+		this.tweens.add({
+			targets: this.playagainBtn,
+			x: this.game.config.width / 2,
+			y: 275,
+			alpha: 1,
+			ease: 'Linear',
+			delay: 1000,
+			duration: 600,
+			repeat: 0,
+			yoyo: false
+		});
+	}
+
 	checkWin() {
 		let player = this.currentPlayer ? 'x' : 'o';
 		//horizontal
-		if(this.gameBoard[1] == this.gameBoard[2] && this.gameBoard[2] == this.gameBoard[3]) { console.log(`${player} won`); }
-		else if(this.gameBoard[4] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[6]) { console.log(`${player} won`); }
-		else if(this.gameBoard[7] == this.gameBoard[8] && this.gameBoard[8] == this.gameBoard[9]) { console.log(`${player} won`); }
+		if(this.gameBoard[1] == this.gameBoard[2] && this.gameBoard[2] == this.gameBoard[3]) { this.winningAnimation(player); }
+		else if(this.gameBoard[4] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[6]) { this.winningAnimation(player); }
+		else if(this.gameBoard[7] == this.gameBoard[8] && this.gameBoard[8] == this.gameBoard[9]) { this.winningAnimation(player); }
 		//vertial
-		else if(this.gameBoard[1] == this.gameBoard[4] && this.gameBoard[4] == this.gameBoard[7]) { console.log(`${player} won`); }
-		else if(this.gameBoard[2] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[8]) { console.log(`${player} won`); }
-		else if(this.gameBoard[3] == this.gameBoard[6] && this.gameBoard[6] == this.gameBoard[9]) { console.log(`${player} won`); }
+		else if(this.gameBoard[1] == this.gameBoard[4] && this.gameBoard[4] == this.gameBoard[7]) { this.winningAnimation(player); }
+		else if(this.gameBoard[2] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[8]) { this.winningAnimation(player); }
+		else if(this.gameBoard[3] == this.gameBoard[6] && this.gameBoard[6] == this.gameBoard[9]) { this.winningAnimation(player); }
 		//crosses
-		else if(this.gameBoard[1] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[9]) { console.log(`${player} won`); }
-		else if(this.gameBoard[3] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[7]) { console.log(`${player} won`); }
+		else if(this.gameBoard[1] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[9]) { this.winningAnimation(player); }
+		else if(this.gameBoard[3] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[7]) { this.winningAnimation(player); }
 		//draw
 		else if(
 			this.gameBoard[1] != 'a' &&
