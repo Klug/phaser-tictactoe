@@ -25,6 +25,45 @@ export default class Level1 extends Phaser.Scene {
 		this.load.image('oIcon', '/assets/sprites/board/o.png');
 
 	}
-	create() {}
-	update(time, delta) {}
+	create() {
+		//board fields
+		this.gameBoard = [0, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+
+		//true=X ; false=O
+		this.currentPlayer = true;
+
+		//**AUDIO
+			//BG music
+		this.intro_music = this.sound.add('intro_music', {
+			mute: false,
+			volume: 1,
+			loop: true
+		});
+		// this.intro_music.play();
+		this.coin_sound = this.sound.add('coin_sound');
+		this.winning_sound = this.sound.add('winning_sound');
+
+		//**GAME-OBJECTS
+		this.background = this.add.image(0, 0, 'background').setOrigin(0, 0);
+		this.title = this.add.image(this.game.config.width / 2, 50, 'title').setScale(0.5, 0.5);
+			//board Images
+		this.boardbg = this.add.image(21, 91, 'boardbg').setOrigin(0,0);
+		this.box_blank1 = this.add.image(32, 102, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 1);
+		this.box_blank2 = this.add.image(74, 102, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 2);
+		this.box_blank3 = this.add.image(116, 102, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 3);
+		this.box_blank4 = this.add.image(32, 144, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 4);
+		this.box_blank5 = this.add.image(74, 144, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 5);
+		this.box_blank6 = this.add.image(116, 144, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 6);
+		this.box_blank7 = this.add.image(32, 186, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 7);
+		this.box_blank8 = this.add.image(74, 186, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 8);
+		this.box_blank9 = this.add.image(116, 186, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 9);
+			//display winning and play again
+		this.playagainBtn = this.add.image(this.game.config.width/2, 275, 'playagain').setDepth(5);
+		this.wins = this.add.image(-200, 150, 'wins').setDepth(5);
+		this.xIcon = this.add.image(this.game.config.width / 2, 140, 'xIcon').setAlpha(0).setScale(0.5, 0.5).setDepth(6);
+		this.oIcon = this.add.image(this.game.config.width / 2, 140, 'oIcon').setAlpha(0).setScale(0.5, 0.5).setDepth(6);
+	}
+	update(time, delta) {
+
+	}
 }
