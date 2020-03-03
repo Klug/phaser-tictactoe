@@ -5,27 +5,7 @@ export default class Level1 extends Phaser.Scene {
 		});
 	}
 
-	preload() {
-		//**Audios
-		this.load.audio('intro_music', ['/assets/audio/01-Opening.ogg']);
-		this.load.audio('coin_sound', ['/assets/audio/sfx_coin_double1.wav']);
-		this.load.audio('winning_sound', ['/assets/audio/sfx_sounds_powerup4.wav']);
-		//**Images
-			//title
-		this.load.image('background', '/assets/sprites/titlescreen/background.png');
-		this.load.image('title', '/assets/sprites/titlescreen/title.png');
-			//background
-		this.load.image('box_blank', '/assets/sprites/box_blank.png');
-		this.load.image('box_xblue', '/assets/sprites/box_xblue.png');
-		this.load.image('box_ored', '/assets/sprites/box_ored.png');
-			//board
-		this.load.image('boardbg', '/assets/sprites/board/boardbg.png');
-		this.load.image('playagain', '/assets/sprites/board/playagain.png');
-		this.load.image('wins', '/assets/sprites/board/wins.png');
-		this.load.image('xIcon', '/assets/sprites/board/x.png');
-		this.load.image('oIcon', '/assets/sprites/board/o.png');
-
-	}
+	preload() {}
 
 	create() {
 		//board fields
@@ -60,7 +40,13 @@ export default class Level1 extends Phaser.Scene {
 		this.box_blank8 = this.add.image(74, 186, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 8);
 		this.box_blank9 = this.add.image(116, 186, 'box_blank').setOrigin(0, 0).setInteractive().setDataEnabled().data.set('box_number', 9);
 			//display winning and play again
-		this.playagainBtn = this.add.image(this.game.config.width/2, 400, 'playagain').setDepth(5);
+		this.playagainBtn = this.add.image(this.game.config.width/2, 400, 'playagain').setDepth(5).setInteractive();
+		this.playagainBtn.on('pointerdown', (pointer, localX, localY, event) => {
+			this.intro_music.stop();
+			// this.scene.stop();
+			// this.scene.start('Level1');
+			this.scene.restart();
+		});
 		this.wins = this.add.image(-200, 150, 'wins').setDepth(5);
 		this.xIcon = this.add.image(this.game.config.width / 2, 140, 'xIcon').setAlpha(0).setScale(0.5, 0.5).setDepth(6);
 		this.oIcon = this.add.image(this.game.config.width / 2, 140, 'oIcon').setAlpha(0).setScale(0.5, 0.5).setDepth(6);
@@ -227,7 +213,5 @@ export default class Level1 extends Phaser.Scene {
 
 	}
 
-	update(time, delta) {
-
-	}
+	update(time, delta) {}
 }
