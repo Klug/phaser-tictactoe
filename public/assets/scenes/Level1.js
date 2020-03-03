@@ -4,6 +4,7 @@ export default class Level1 extends Phaser.Scene {
 			key: 'Level1'
 		});
 	}
+
 	preload() {
 		//**Audios
 		this.load.audio('intro_music', ['/assets/audio/01-Opening.ogg']);
@@ -25,6 +26,7 @@ export default class Level1 extends Phaser.Scene {
 		this.load.image('oIcon', '/assets/sprites/board/o.png');
 
 	}
+
 	create() {
 		//board fields
 		this.gameBoard = [0, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
@@ -62,7 +64,73 @@ export default class Level1 extends Phaser.Scene {
 		this.wins = this.add.image(-200, 150, 'wins').setDepth(5);
 		this.xIcon = this.add.image(this.game.config.width / 2, 140, 'xIcon').setAlpha(0).setScale(0.5, 0.5).setDepth(6);
 		this.oIcon = this.add.image(this.game.config.width / 2, 140, 'oIcon').setAlpha(0).setScale(0.5, 0.5).setDepth(6);
+
+		this.clickedBox();
 	}
+
+	clickedBox() {
+		let player = this.currentPlayer ? 'x' : 'o';
+
+		//gameobject listener
+		this.input.on('gameobjectdown', (pointer, gameObject) => {
+			if(this.gameBoard[1] == 'a' && gameObject.data.get('box_number') == 1) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[1] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			} else if(this.gameBoard[2] == 'b' && gameObject.data.get('box_number') == 2) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[2] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			} else if(this.gameBoard[3] == 'c' && gameObject.data.get('box_number') == 3) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[3] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			} else if(this.gameBoard[4] == 'd' && gameObject.data.get('box_number') == 4) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[4] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			} else if(this.gameBoard[5] == 'e' && gameObject.data.get('box_number') == 5) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[5] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			} else if(this.gameBoard[6] == 'f' && gameObject.data.get('box_number') == 6) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[6] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			} else if(this.gameBoard[7] == 'g' && gameObject.data.get('box_number') == 7) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[7] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			} else if(this.gameBoard[8] == 'h' && gameObject.data.get('box_number') == 8) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[8] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			} else if(this.gameBoard[9] == 'i' && gameObject.data.get('box_number') == 9) {
+				gameObject.destroy();
+				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
+				this.gameBoard[9] = this.currentPlayer ? 'x' : 'o';
+				this.currentPlayer = !this.currentPlayer;
+				this.coin_sound.play();
+			}
+		});
+	}
+
 	update(time, delta) {
 
 	}
