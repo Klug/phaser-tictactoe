@@ -120,7 +120,20 @@ export default class Intro extends Phaser.Scene {
 				repeat: 0
 			}]
 		});
+
+		//**Actions
+			//Start Button
+		this.keys = this.input.keyboard.addKeys('ENTER, SPACE');
+		this.startbutton.setInteractive().on('pointerdown', () => {
+			this.intro_music.stop();
+			this.scene.start('Level1');
+		});
 	}
+
 	update(delta) {
+		if(this.keys.SPACE.isDown || this.keys.ENTER.isDown) {
+			this.intro_music.stop();
+			this.scene.start('Level1');
+		}
 	}
 }
