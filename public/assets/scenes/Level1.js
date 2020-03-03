@@ -70,65 +70,108 @@ export default class Level1 extends Phaser.Scene {
 
 	clickedBox() {
 		let player = this.currentPlayer ? 'x' : 'o';
-
 		//gameobject listener
 		this.input.on('gameobjectdown', (pointer, gameObject) => {
 			if(this.gameBoard[1] == 'a' && gameObject.data.get('box_number') == 1) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[1] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
 			} else if(this.gameBoard[2] == 'b' && gameObject.data.get('box_number') == 2) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[2] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
 			} else if(this.gameBoard[3] == 'c' && gameObject.data.get('box_number') == 3) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[3] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
 			} else if(this.gameBoard[4] == 'd' && gameObject.data.get('box_number') == 4) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[4] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
 			} else if(this.gameBoard[5] == 'e' && gameObject.data.get('box_number') == 5) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[5] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
 			} else if(this.gameBoard[6] == 'f' && gameObject.data.get('box_number') == 6) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[6] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
 			} else if(this.gameBoard[7] == 'g' && gameObject.data.get('box_number') == 7) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[7] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
 			} else if(this.gameBoard[8] == 'h' && gameObject.data.get('box_number') == 8) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[8] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
 			} else if(this.gameBoard[9] == 'i' && gameObject.data.get('box_number') == 9) {
 				gameObject.destroy();
 				this.box_blank1 = this.add.image(gameObject.x, gameObject.y, this.currentPlayer ? 'box_xblue' : 'box_ored').setOrigin(0, 0);
 				this.gameBoard[9] = this.currentPlayer ? 'x' : 'o';
+				this.checkWin();
 				this.currentPlayer = !this.currentPlayer;
 				this.coin_sound.play();
+			} else {
+				alert('Sorry Buddy can\'t do that!')
 			}
 		});
+	}
+
+	checkWin() {
+		let player = this.currentPlayer ? 'x' : 'o';
+		//horizontal
+		if(this.gameBoard[1] == this.gameBoard[2] && this.gameBoard[2] == this.gameBoard[3]) { console.log(`${player} won`); }
+		else if(this.gameBoard[4] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[6]) { console.log(`${player} won`); }
+		else if(this.gameBoard[7] == this.gameBoard[8] && this.gameBoard[8] == this.gameBoard[9]) { console.log(`${player} won`); }
+		//vertial
+		else if(this.gameBoard[1] == this.gameBoard[4] && this.gameBoard[4] == this.gameBoard[7]) { console.log(`${player} won`); }
+		else if(this.gameBoard[2] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[8]) { console.log(`${player} won`); }
+		else if(this.gameBoard[3] == this.gameBoard[6] && this.gameBoard[6] == this.gameBoard[9]) { console.log(`${player} won`); }
+		//crosses
+		else if(this.gameBoard[1] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[9]) { console.log(`${player} won`); }
+		else if(this.gameBoard[3] == this.gameBoard[5] && this.gameBoard[5] == this.gameBoard[7]) { console.log(`${player} won`); }
+		//draw
+		else if(
+			this.gameBoard[1] != 'a' &&
+			this.gameBoard[2] != 'b' &&
+			this.gameBoard[3] != 'c' &&
+			this.gameBoard[4] != 'd' &&
+			this.gameBoard[5] != 'e' &&
+			this.gameBoard[6] != 'f' &&
+			this.gameBoard[7] != 'g' &&
+			this.gameBoard[8] != 'h' &&
+			this.gameBoard[9] != 'i'
+		) {
+			console.log('DRAW');
+		}
+		else {
+			console.log('continue');
+		}
+
 	}
 
 	update(time, delta) {
